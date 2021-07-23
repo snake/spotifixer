@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Spotify (including link handling)
+GenericName=Music Player
+Icon=spotify-client
+Exec=/opt/spotifixer/spotifixer.sh %u
+Terminal=false
+MimeType=x-scheme-handler/spotify;
+Categories=Audio;Music;Player;AudioVideo;
+StartupWMClass=spotify
+Comment=
+Path=
+StartupNotify=false
