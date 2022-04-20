@@ -39,7 +39,7 @@ following a spotify song link).
     var data=document.URL.match(/[\/\&](track|playlist|album|artist|show|episode)\/([^\&\#\/\?]+)/i);
     console.log("This is a "+data[1]+" with id:"+data[2]+"\nAttempting to redirect");
     window.location.replace('spotify:'+data[1]+':'+data[2]);
-    window.close();
+    //window.close(); // Uncomment after selecting an application to handle spotify links during the first launch.
 })();
 ```
 
@@ -56,20 +56,21 @@ following a spotify song link).
    To the function, underneath window.location.replace:  
    window.close();
 
-4. Move/copy spotify.desktop to ~/.local/share/applications/, which effectively overrides the
+   Note also that window.close() is commented out initially because the application used to handle spotify links must be selected on first launch. Once this has been done, this line can be uncommented (see last step). 
+   
+3. Move/copy spotify.desktop to ~/.local/share/applications/, which effectively overrides the
 default desktop file at /usr/share/applications/spotify.desktop
 
-5. Copy the script spotifixer.sh to the desired location.
+4. Copy the script spotifixer.sh to the desired location.
 
-6. Edit the desktop file, and set the script location to the one you just set:
+5. Edit the desktop file, and set the script location to the one you just set:
    e.g. Modify the 'Exec=' line as follows:
 
-   Exec=PATH/TO/SPOTIFIXER/spotifixer.sh %u
+   Exec=PATH/TO/SPOTIFIXER/spotifixer.sh %u 
 
-7. You may also need to allow scripts to close windows/tabs via about:config (for firefox) by setting:
-dom.allow_scripts_to_close_windows = true. See also FAQ section.
+6. Launch a spotify song URL. When prompted by the browser to select an application, choose "Spotify (including link handling)" and click "Always use this application". The desktop client will launch and the song will automatically play, but the browser tab will remain open.
 
-8. Launch a spotify song URL and enjoy!
+7. Edit the greasemonkey script, uncommenting the window.close() line and relaunch a song link. The browser tab should now close automatically after the desktop client launches (see FAQ if this isn't the case).
 
 ## FAQs:
 Q: The song won't play after launching a new client instance. What's going on?
@@ -79,4 +80,5 @@ it issues the qdbus commands. You can extend this timeout, and that should resol
 
 Q: The browser tab doesn't close automatically. What can I do to fix it?
 
-A: See point 7 in installation instructions. This is most likely a browser security measure.
+A: You may also need to allow scripts to close windows/tabs via about:config (for firefox) by setting:
+dom.allow_scripts_to_close_windows = true.
